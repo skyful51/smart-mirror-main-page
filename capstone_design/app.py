@@ -12,6 +12,7 @@ from static.cursor.SingleClass import SingleClass
 app = Flask(__name__)
 #__name__ 인자는 정적파일과 템플릿을 찾는 데 쓰임 
 import crawling
+import weather
 iot = IoT.IoT()
 # mp_gesture = mediapipe_gesture.mediapipe_gesture()
 single_class = SingleClass()
@@ -21,8 +22,9 @@ def hello():
     news_list, href, img = crawling.news_crawling()
     img_list = crawling.img_src(news_list)
     sum_list = crawling.summary(news_list)
+    weather_info = weather.return_weather_info()
 
-    return render_template('index.html', news_list = news_list, href = href, img = img, img_list=img_list, len = len(news_list), sum = sum_list )
+    return render_template('index.html', news_list = news_list, href = href, img = img, img_list=img_list, len = len(news_list), sum = sum_list, weather_info=weather_info )
     
 
 @app.route('/update_iot', methods=['GET'])
