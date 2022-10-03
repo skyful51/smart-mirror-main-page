@@ -5,7 +5,7 @@ import numpy as np
 class SingleClass:
 
     def __init__(self, csv_file_path="static/cursor/gesture_train.csv", src="/dev/video0"):
-
+    
         # 제스처 관련 변수들
         self.gesture = {
             0:'fist', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five',

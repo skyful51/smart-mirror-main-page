@@ -2,30 +2,30 @@
 IoTs = ['light', 'boiler', 'fan', 'window', 'valve'];
 
 var startRecog = document.getElementById('button scrolly');
-var result = document.getElementsByClassName('result')[0];
+var result = document.getElementById('speach-recog');
 
 // 220717 추가 : IoT 제어 중에는 업데이트가 안되도록 하는 변수 (임시, 나중에 개선할 수 있으면 개선할 것)
 var isUpdateAble = false;
 
-// (임시) 제스처 시작 버튼 이벤트 리스너
-startRecog.addEventListener('click', function() {
-    sendGestureRequest();
+// // (임시) 제스처 시작 버튼 이벤트 리스너
+// startRecog.addEventListener('click', function() {
+//     sendGestureRequest();
 
-    // 220905 제스처 인식 시작 버튼으로 변경
-    // if (annyang) {
+//     // 220905 제스처 인식 시작 버튼으로 변경
+//     // if (annyang) {
     
-    //     //annyang.addCommands(commands);
-    //     //annyang.debug();
-    //     annyang.setLanguage('ko');
-    //     annyang.start();
-    //     console.log('annyang started');
+//     //     //annyang.addCommands(commands);
+//     //     //annyang.debug();
+//     //     annyang.setLanguage('ko');
+//     //     annyang.start();
+//     //     console.log('annyang started');
 
-    //     setTimeout(function() {
-    //         annyang.abort();
-    //         console.log("annyang aborted");
-    //     }, 5000);
-    // }
-});
+//     //     setTimeout(function() {
+//     //         annyang.abort();
+//     //         console.log("annyang aborted");
+//     //     }, 5000);
+//     // }
+// });
 
 // 음성 인식 결과 처리 콜백
 annyang.addCallback('result', function(userSaid) {
@@ -170,6 +170,7 @@ function update() {
     //         console.log('cannot update now');
     //     }
     // }, 3000);
+    console.log("here")
     if (isUpdateAble) {
         $.ajax({
             type: 'GET',
