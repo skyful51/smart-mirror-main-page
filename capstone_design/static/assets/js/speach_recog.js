@@ -31,6 +31,7 @@ var isUpdateAble = false;
 annyang.addCallback('result', function(userSaid) {
     annyang.abort();
     console.log("annyang stopped");
+    result.innerHTML = "";
     result.innerHTML = userSaid[0];
     // isUpdateAble = false;
 
@@ -66,12 +67,18 @@ function startVoiceRecog() {
         annyang.setLanguage('ko');
         annyang.start();
         console.log('start annyang record');
+        result.innerHTML = "명령어를 말씀하세요.";
+
+        setTimeout(function() {
+            result.innerHTML = "";
+        }, 90000);
         
         setTimeout(function() {
             if (annyang.isListening() === true) {
                 console.log("annyang still running?: " + annyang.isListening());
                 annyang.pause();
                 console.log('pause annydsfsdfang record');
+                result.innerHTML = "";
                 sendGestureRequest();
             }
         }, 10000);
