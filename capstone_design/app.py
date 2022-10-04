@@ -3,7 +3,7 @@ import json
 import ssl
 import time
 
-import static.assets.py.IoT as IoT
+# import static.assets.py.IoT as IoT
 import static.assets.py.Recognizer as Recognizer
 # import static.assets.py.mediapipe_gesture as mediapipe_gesture
 # import static.cursor.single as single
@@ -13,7 +13,7 @@ app = Flask(__name__)
 #__name__ 인자는 정적파일과 템플릿을 찾는 데 쓰임 
 import crawling
 import weather
-iot = IoT.IoT()
+# iot = IoT.IoT()
 # mp_gesture = mediapipe_gesture.mediapipe_gesture()
 single_class = SingleClass()
 
@@ -29,10 +29,10 @@ def hello():
 
 @app.route('/update_iot', methods=['GET'])
 def update_iot_status():
-    iot_update_result = iot.get_initial_state()
+    # iot_update_result = iot.get_initial_state()
 
     response = app.response_class(
-        response = json.dumps(iot_update_result),
+        response = json.dumps({"update": "ok"}),
         status = 200,
         mimetype = 'application/json'
     )
@@ -74,13 +74,13 @@ def speech_recognition():
     print(command)
 
     if command != 'no match':
-        iot.command = command
-        iot.socket.close()
-        control_result = iot.control_iot()
-        print(control_result)
+        # iot.command = command
+        # iot.socket.close()
+        # control_result = iot.control_iot()
+        # print(control_result)
 
         response_dict = app.response_class(
-            response = json.dumps(control_result),
+            response = json.dumps({"iot": "ok"}),
             status = 200,
             mimetype = 'application/json'
         )
