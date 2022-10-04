@@ -62,9 +62,15 @@ class IoT:
 
         self.socket_busy = True
 
-        self.socket = BluetoothSocket( RFCOMM )
-        self.socket.connect((mac[0], 1))
-        self.socket.send('i')
+        try:
+            self.socket = BluetoothSocket( RFCOMM )
+            self.socket.connect((mac[0], 1))
+            self.socket.send('i')
+        
+        except Exception as e:
+            print(e)
+            self.socket.close()
+            return return_dict
 
         idx = 0
 
@@ -227,11 +233,16 @@ class IoT:
         # 블루투스 통신을 위한 소켓 객체을 만들고 지정한 MAC 주소로 연결
         time.sleep(0.5)
         self.socket.close()
-        self.socket = BluetoothSocket( RFCOMM )
-        self.socket.connect((mac, 1))
+
+        try:
+            self.socket = BluetoothSocket( RFCOMM )
+            self.socket.connect((mac, 1))
+            
+            # 음성 인식 결과에 따라 다른 메시지를 아두이노로 전송
+            self.socket.send(msg)
         
-        # 음성 인식 결과에 따라 다른 메시지를 아두이노로 전송
-        self.socket.send(msg)
+        except Exception as e:
+            print(e)
 
         self.socket.close()
         self.socket_busy = False
