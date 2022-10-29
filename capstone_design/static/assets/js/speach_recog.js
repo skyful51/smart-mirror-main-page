@@ -1,5 +1,5 @@
 // IoT 종류
-IoTs = ['light', 'boiler', 'fan', 'window', 'valve'];
+IoTs = ['fan', 'window', 'light'];
 
 var startRecog = document.getElementById('button scrolly');
 var result = document.getElementById('speach-recog');

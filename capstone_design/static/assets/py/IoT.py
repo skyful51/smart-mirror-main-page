@@ -6,14 +6,8 @@ commands = [
     '불꺼줘',
     '조명켜줘',
     '조명꺼줘',
-    '가스잠가줘',
-    '가스밸브잠가줘',
-    '보일러켜줘',
-    '보일러꺼줘',
     '창문열어줘',
     '창문닫아줘',
-    '커튼쳐줘',
-    '커튼걷어줘',
     '환풍기켜줘',
     '환풍기꺼줘',
     '스마트미러명령어'
@@ -21,13 +15,11 @@ commands = [
 
 # 각 IoT 기기에 사용된 블루투스 모듈의 MAC 주소
 mac = [
-    '98:DA:60:06:34:B2',
-    '98:D3:31:FB:86:EE',
-    '98:DA:60:01:C3:37'
+    '98:DA:60:06:34:B2'
     ]
 
 # IoT 기기 종류
-iot = ['light', 'boiler', 'fan', 'window', 'valve']
+iot = ['fan', 'window', 'light']
 max_iot_len = len(iot)
 
 class IoT:
@@ -123,23 +115,23 @@ class IoT:
             result = self.control_light(self.command)
             return result
             
+        # elif (self.command == commands[4]) or (self.command == commands[5]):
+        #     result = self.control_valve(self.command)
+        #     return result
+            
+        # elif (self.command == commands[6]) or (self.command == commands[7]):
+        #     result = self.control_boiler(self.command)
+        #     return result
+            
         elif (self.command == commands[4]) or (self.command == commands[5]):
-            result = self.control_valve(self.command)
-            return result
-            
-        elif (self.command == commands[6]) or (self.command == commands[7]):
-            result = self.control_boiler(self.command)
-            return result
-            
-        elif (self.command == commands[8]) or (self.command == commands[9]):
             result = self.control_window(self.command)
             return result
 
-        elif (self.command == commands[10]) or (self.command == commands[11]):
-            result = self.control_curtain(self.command)
-            return result
+        # elif (self.command == commands[10]) or (self.command == commands[11]):
+        #     result = self.control_curtain(self.command)
+        #     return result
             
-        elif (self.command == commands[12]) or (self.command == commands[13]):
+        elif (self.command == commands[6]) or (self.command == commands[7]):
             result = self.control_fan(self.command)
             return result
         
@@ -163,30 +155,30 @@ class IoT:
             return {'light' : 'off'}
 
     # control gas valve   
-    def control_valve(self, cmd):
-        # send 10 to close the valve
-        print(f'command : {cmd}')
-        self.send_bluetooth(mac[0], 'v')
-        return {'valve' : 'off'}
+    # def control_valve(self, cmd):
+    #     # send 10 to close the valve
+    #     print(f'command : {cmd}')
+    #     self.send_bluetooth(mac[0], 'v')
+    #     return {'valve' : 'off'}
 
     # control boiler // 블루투스 모듈이 부족해서 지금은 LED에 쓰는 모듈이랑 같이 사용  
-    def control_boiler(self, cmd):
-        print(f'command : {cmd}')
+    # def control_boiler(self, cmd):
+    #     print(f'command : {cmd}')
         
-        if cmd == commands[6]:
-            # send 3 to turn on the boiler
-            self.send_bluetooth(mac[0], '3')
-            return {'boiler' : 'on'}
-        else:
-            # send 2 to turn off the boiler
-            self.send_bluetooth(mac[0], '2')
-            return {'boiler' : 'off'}
+    #     if cmd == commands[6]:
+    #         # send 3 to turn on the boiler
+    #         self.send_bluetooth(mac[0], '3')
+    #         return {'boiler' : 'on'}
+    #     else:
+    #         # send 2 to turn off the boiler
+    #         self.send_bluetooth(mac[0], '2')
+    #         return {'boiler' : 'off'}
 
     # control window   
     def control_window(self, cmd):
         print(f'command : {cmd}')
         
-        if cmd == commands[8]:
+        if cmd == commands[4]:
             # send 3 to open the window
             self.send_bluetooth(mac[0], '7')
             return {'window' : 'on'}
@@ -196,23 +188,23 @@ class IoT:
             return {'window' : 'off'}
 
     # control curtain   
-    def control_curtain(self, cmd):
-        print(f'command : {cmd}')
+    # def control_curtain(self, cmd):
+    #     print(f'command : {cmd}')
         
-        if cmd == commands[10]:
-            # send 3 to on the curtain
-            self.send_bluetooth(mac[0], '9')
-            return {'curtain' : 'on'}
-        else:
-            # send 2 to off the curtain
-            self.send_bluetooth(mac[0], '8')
-            return {'curtain' : 'off'}
+    #     if cmd == commands[10]:
+    #         # send 3 to on the curtain
+    #         self.send_bluetooth(mac[0], '9')
+    #         return {'curtain' : 'on'}
+    #     else:
+    #         # send 2 to off the curtain
+    #         self.send_bluetooth(mac[0], '8')
+    #         return {'curtain' : 'off'}
 
     # control fan   
     def control_fan(self, cmd):
         print(f'command : {cmd}')
         
-        if cmd == commands[12]:
+        if cmd == commands[6]:
             # send 3 to turn on the boiler
             self.send_bluetooth(mac[0], '5')
             return {'fan' : 'on'}
