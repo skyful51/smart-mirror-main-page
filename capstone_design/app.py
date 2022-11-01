@@ -15,7 +15,7 @@ import crawling
 import weather
 iot = IoT.IoT()
 # mp_gesture = mediapipe_gesture.mediapipe_gesture()
-single_class = SingleClass(src=1)
+single_class = SingleClass()
 
 @app.route('/')
 def hello():
