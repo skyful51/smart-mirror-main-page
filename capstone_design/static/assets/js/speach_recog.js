@@ -107,7 +107,7 @@ function sendGestureRequest() {
         // main -> 메인 섹션으로 이동
         // news -> 뉴스 섹션으로 이동
         // iot -> iot 섹션으로 이동
-        if (json_data === {"gesture": "ok"})
+        if (Object.values(json_data)[0] === "ok")
             startVoiceRecog();
         else if (Object.values(json_data)[0] === "main_page") {
             console.log("here");
