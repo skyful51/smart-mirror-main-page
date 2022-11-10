@@ -3,6 +3,9 @@ IoTs = ['fan', 'window', 'light'];
 
 var startRecog = document.getElementById('button scrolly');
 var result = document.getElementById('speach-recog');
+var mainLink = document.getElementById('main-link');
+var newsLink = document.getElementById('news-link');
+var iotLink = document.getElementById('iot-link');
 
 // 220717 추가 : IoT 제어 중에는 업데이트가 안되도록 하는 변수 (임시, 나중에 개선할 수 있으면 개선할 것)
 var isUpdateAble = false;
@@ -98,7 +101,32 @@ function sendGestureRequest() {
         data: stringify
     }).done(function(json_data) {
         console.log(json_data);
-        startVoiceRecog();
+
+        // 221107 제스처에 따라 다른 기능 수행
+        // ok -> 음성 인식 시작
+        // main -> 메인 섹션으로 이동
+        // news -> 뉴스 섹션으로 이동
+        // iot -> iot 섹션으로 이동
+        if (json_data === {"gesture": "ok"})
+            startVoiceRecog();
+        else if (Object.values(json_data)[0] === "main_page") {
+            console.log("here");
+            mainLink.click()
+            sendGestureRequest();
+            }
+        else if (Object.values(json_data)[0] === "news_page") {
+            console.log("here");
+            newsLink.click()
+            sendGestureRequest();
+            }
+        else if (Object.values(json_data)[0] === "iot_page") {
+            console.log("here");
+            iotLink.click()
+            sendGestureRequest();
+            }
+        else
+            sendGestureRequest();
+
     }).fail(function(xhr, status, error) {
         console.log('error occured');
     });

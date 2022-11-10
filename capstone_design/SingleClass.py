@@ -1,12 +1,11 @@
 import cv2
 import mediapipe as mp
 import numpy as np
-import time
 # import pyautogui 
 
 class SingleClass:
 
-    def __init__(self, csv_file_path="./static/cursor/gesture_train.csv", src="/dev/video0"):
+    def __init__(self, csv_file_path="C:/test2/smart-mirror-main-page/capstone_design/static/cursor/gesture_train.csv", src="/dev/video0"):
     
         # 제스처 관련 변수들
         self.gesture = {
@@ -93,7 +92,7 @@ class SingleClass:
 
                     # Draw gesture result
                     if idx in self.click_gesture.keys():
-                        time.sleep(1)
+
                         if is_clicked == False:
 
                             is_clicked = True
@@ -103,25 +102,17 @@ class SingleClass:
                     
                     elif idx in self.main_gesture.keys():
                         # pyautogui.moveTo(496, 953)
-                        # pyautogui.click()
-                        time.sleep(1)
+                        # pyautogui.click()  
                         return_dict = {'gesture': 'main_page'}
-                        print(return_dict)
-                        break
                     elif idx in self.news_gesture.keys():
                         # pyautogui.moveTo(473, 1091)
                         # pyautogui.click()
-                        time.sleep(1)
                         return_dict = {'gesture': 'news_page'}
-                        print(return_dict)
-                        break
-                    elif idx in self.iot_gesture.keys():
+                    elif idx in self.iot_gesture.keys():   
                         # pyautogui.moveTo(459, 1235)
                         # pyautogui.click()
-                        time.sleep(1)
                         return_dict = {'gesture': 'iot_page'}
-                        print(return_dict)
-                        break
+                    break
 
                 else:
                     is_clicked = False
@@ -143,5 +134,4 @@ class SingleClass:
                     break
             
             cv2.destroyAllWindows()
-            time.sleep(1)
             return return_dict
