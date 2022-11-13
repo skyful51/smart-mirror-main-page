@@ -93,6 +93,7 @@ function sendGestureRequest() {
     const json_dict = {'gesture': 'request'};
     console.log(json_dict);
     const stringify = JSON.stringify(json_dict);
+    result.innerHTML = "제스처 인식 중입니다...";
 
     $.ajax({
         type: 'POST',
@@ -107,25 +108,31 @@ function sendGestureRequest() {
         // main -> 메인 섹션으로 이동
         // news -> 뉴스 섹션으로 이동
         // iot -> iot 섹션으로 이동
-        if (Object.values(json_data)[0] === "ok")
+        if (Object.values(json_data)[0] === "ok") {
             startVoiceRecog();
+        }
         else if (Object.values(json_data)[0] === "main_page") {
+            result.innerHTML = "메인 섹션 이동...";
             console.log("here");
             mainLink.click()
             sendGestureRequest();
             }
         else if (Object.values(json_data)[0] === "news_page") {
+            result.innerHTML = "뉴스 섹션 이동...";
             console.log("here");
             newsLink.click()
             sendGestureRequest();
             }
         else if (Object.values(json_data)[0] === "iot_page") {
+            result.innerHTML = "IoT 제어 섹션 이동...";
             console.log("here");
             iotLink.click()
             sendGestureRequest();
             }
-        else
+        else {
+            result.innerHTML = "제스처 인식 오류, 재시도 중...";
             sendGestureRequest();
+        }
 
     }).fail(function(xhr, status, error) {
         console.log('error occured');
@@ -175,12 +182,15 @@ function changeIotUi(json_data) {
     for (var key in json_data) {
         if (IoTs.includes(key)) {
             var ui = document.getElementById(key);
+            var msg = document.getElementById(key + "-msg");
             
             if (json_data[key].includes('on')) {
                 ui.style.visibility = 'visible';
+                msg.innerHTML = "ON";
             }
             else {
                 ui.style.visibility = 'hidden';
+                msg.innerHTML = "OFF";
             }
         }
     }
